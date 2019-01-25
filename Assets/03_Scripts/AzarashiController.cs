@@ -14,18 +14,18 @@ public class AzarashiController : MonoBehaviour
 	public float relativeVelocityX;
 	public GameObject sprite;
 
-	public bool IdDead()
+	public bool IsDead()
 	{
 		return isDead;
 	}
 
-	private void Awake()
+	void Awake()
 	{
 		rb2d = GetComponent<Rigidbody2D>();
 		animator = sprite.GetComponent<Animator>();
 	}
 
-	private void Update()
+	void Update()
 	{
 		// 最高高度に達していない場合に限りタップの入力を受け付ける
 		if(Input.GetButtonDown("Fire1") && transform.position.y < maxHeight)
@@ -44,6 +44,9 @@ public class AzarashiController : MonoBehaviour
 	{
 		// 死んだら羽ばたけない
 		if (isDead) return;
+
+		// 重力が効いていない時は操作しない
+		if (rb2d.isKinematic) return;
 
 		// Velocityを直接書き換えて上方向に加速
 		rb2d.velocity = new Vector2(0.0f, flapVelocity);
@@ -71,11 +74,17 @@ public class AzarashiController : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (isDead) return;
 
-		//何かにぶつかったら志望フラグを立てる
+		//何かにぶつかったら死亡フラグを立てる
 		isDead = true;
+	}
+
+	public void SetStreerActive (bool active)
+	{
+		// Rigidbodyのオン、オフを切り替える
+		rb2d.isKinematic = !active;
 	}
 }

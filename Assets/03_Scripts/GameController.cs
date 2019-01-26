@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 	}
 
 	State state;
+	int score;
 
 	public AzarashiController azarashi;
 	public GameObject blocks;
@@ -79,7 +80,12 @@ public class GameController : MonoBehaviour
 	{
 		// 現在読み込んでいるシーンを再読み込み
 		// SceneManager.GetActiveScene().name
-		//SceneManager.LoadScene("Main");
+		// SceneManager.LoadScene("Main");
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void IncreaseScore()
+	{
+		score++;
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -20,6 +21,8 @@ public class GameController : MonoBehaviour
 
 	public AzarashiController azarashi;
 	public GameObject blocks;
+	public Text scoreLabel;
+	public Text stateLabel;
 
 	void Start()
 	{
@@ -55,6 +58,10 @@ public class GameController : MonoBehaviour
 		// 各オブジェクトを無効状態にする
 		azarashi.SetStreerActive(false);
 		blocks.SetActive(false);
+		// ラベルを更新
+		scoreLabel.text = "Score : " + 0;
+		stateLabel.gameObject.SetActive(true);
+		stateLabel.text = "";
 	}
 
 	void GameStart()
@@ -65,6 +72,9 @@ public class GameController : MonoBehaviour
 		blocks.SetActive(true);
 		// 最初の入力だけが、ゲームコントローラーから渡す
 		azarashi.flap();
+		//ラベルを更新
+		stateLabel.gameObject.SetActive(true);
+		stateLabel.text = "Game Over;";
 	}
 
 	void GameOver()
@@ -87,5 +97,6 @@ public class GameController : MonoBehaviour
 	public void IncreaseScore()
 	{
 		score++;
+		scoreLabel.text = "Score : " + score;
 	}
 }

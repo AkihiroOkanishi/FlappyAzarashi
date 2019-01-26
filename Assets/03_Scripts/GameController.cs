@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
 		// ラベルを更新
 		scoreLabel.text = "Score : " + 0;
 		stateLabel.gameObject.SetActive(true);
-		stateLabel.text = "";
+		stateLabel.text = "Ready";
 	}
 
 	void GameStart()
@@ -73,8 +73,8 @@ public class GameController : MonoBehaviour
 		// 最初の入力だけが、ゲームコントローラーから渡す
 		azarashi.flap();
 		//ラベルを更新
-		stateLabel.gameObject.SetActive(true);
-		stateLabel.text = "Game Over;";
+		stateLabel.gameObject.SetActive(false);
+		stateLabel.text = "";
 	}
 
 	void GameOver()
@@ -84,6 +84,9 @@ public class GameController : MonoBehaviour
 		ScrollObject[] scrollObjects = GameObject.FindObjectsOfType<ScrollObject>();
 		// 全ScrollObjectのスクロール処理を無効にする
 		foreach (ScrollObject so in scrollObjects) so.enabled = false;
+		//ラベルを更新
+		stateLabel.gameObject.SetActive(true);
+		stateLabel.text = "Game Over";
 	}
 
 	void Reload()

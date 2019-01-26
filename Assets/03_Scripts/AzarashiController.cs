@@ -78,7 +78,10 @@ public class AzarashiController : MonoBehaviour
 	{
 		if (isDead) return;
 
-		//何かにぶつかったら死亡フラグを立てる
+		// クラッシュエフェクト
+		Camera.main.SendMessage("Clash");
+
+		// 何かにぶつかったら死亡フラグを立てる
 		isDead = true;
 	}
 
